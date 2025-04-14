@@ -5,6 +5,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="styles.css">
+	<script src="script.js" defer></script>
+	<script src="./logic/addForm.js" defer></script>
 	<title>Document</title>
 </head>
 
@@ -13,7 +15,7 @@
 		<div id="name">
 			Base de donnée des livres
 		</div>
-		<div id="seatch_bar">
+		<div id="seatchBar">
 			<input type="text" id="search" placeholder="Rechercher un livre avec un EAN/Titre/Auteur">
 		</div>
 		<div id="filter">
@@ -36,28 +38,28 @@
 	<nav id="category-selector">
 		<input type="radio" name="category" id="acc" checked>
 		<label for="acc">Album Compte Comptine</label>
-	
+
 		<input type="radio" name="category" id="romJunior">
 		<label for="romJunior">Roman Jeunesse</label>
-	
+
 		<input type="radio" name="category" id="romYoung">
 		<label for="romYoung">Roman Ado</label>
-	
+
 		<input type="radio" name="category" id="docJunior">
 		<label for="docJunior">Doc Jeunesse</label>
-	
+
 		<input type="radio" name="category" id="manga">
 		<label for="manga">Manga</label>
-	
+
 		<input type="radio" name="category" id="BDJunior">
 		<label for="BDJunior">BD Jeunesse</label>
-	
+
 		<input type="radio" name="category" id="romAdult">
 		<label for="romAdult">Roman Adulte</label>
-	
+
 		<input type="radio" name="category" id="docAdult">
 		<label for="docAdult">Doc Adulte</label>
-	
+
 		<input type="radio" name="category" id="BDAdultYoung">
 		<label for="BDAdultYoung">BD Adulte/Ado</label>
 	</nav>
@@ -69,7 +71,7 @@
 				<button id="applyNewStatus">Appliquer</button>
 			</div>
 			<div class="status-selector">
-				<select name="selectProdiver" id="selectProdiver">
+				<select name="selectProdiver" id="selectProdiverEdit">
 					<option selected value="disabled" disabled> -- Choisissez un statut -- </option>
 					<option value="acquired">Aquis</option>
 					<option value="nonAcquired">Non aquis</option>
@@ -84,7 +86,7 @@
 			<button id="addBook">Ajouter un livre</button>
 		</div>
 	</section>
-	
+
 </body>
 
 </html>
