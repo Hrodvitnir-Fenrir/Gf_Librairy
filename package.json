@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "start:dev": "nodemon server.js"
+    "start:dev": "nodemon server.js",
+    "lint-ejs": "ejs-lint views/**/*.ejs",
+    "lint": "eslint . && npm run lint-ejs"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +18,7 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "ejs-lint": "^2.0.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
