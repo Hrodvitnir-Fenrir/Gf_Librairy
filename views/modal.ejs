@@ -17,7 +17,7 @@
 				<input name="title" placeholder="Titre" required class="flex-half">
 			</div>
 			<div class="flex-row">
-				<input name="tome" placeholder="Tome" class="flex-half">
+				<input name="tome" type="number" placeholder="Tome" class="flex-half">
 				<input name="date" placeholder="Date" required class="flex-half">
 			</div>
 			<input name="link" placeholder="Lien">
@@ -28,9 +28,9 @@
 			<div class="flex-row">
 				<input name="section" placeholder="Section" list="section-options" class="flex-half" required>
 				<datalist id="section-options">
-					<% type.sections.forEach(function(section){ %>
+					<%/* type.sections.forEach(function(section){ %>
 						<option value="<%= section %>">
-					<% }); %>
+					<% }); */%>
 				</datalist>
 				<input name="genre" placeholder="Genre" list="genre-options" class="flex-half" required>
 				<datalist id="genre-options">
