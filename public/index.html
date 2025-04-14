@@ -61,6 +61,29 @@
 		<input type="radio" name="category" id="BDAdultYoung">
 		<label for="BDAdultYoung">BD Adulte/Ado</label>
 	</nav>
+	<section id="addAndMultiEdit">
+		<div id="MultiEdit">
+			<div class="checkbox-and-apply">
+				<input type="checkbox" name="SelectAll" id="selectAll">
+				<label for="selectAll">Selectionner tout les livres visibles</label>
+				<button id="applyNewStatus">Appliquer</button>
+			</div>
+			<div class="status-selector">
+				<select name="selectProdiver" id="selectProdiver">
+					<option selected value="disabled" disabled> -- Choisissez un statut -- </option>
+					<option value="acquired">Aquis</option>
+					<option value="nonAcquired">Non aquis</option>
+					<option value="onList">Sur liste d'acquisition</option>
+					<option value="onShiping">En cours de livraison</option>
+					<option value="equipment">Equipment</option>
+					<option value="notAvailable">Non disponible</option>
+				</select>
+			</div>
+		</div>
+		<div id="addBookWrapper">
+			<button id="addBook">Ajouter un livre</button>
+		</div>
+	</section>
 	
 </body>
 
