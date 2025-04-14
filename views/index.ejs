@@ -20,12 +20,12 @@
 			<input type="text" id="search" placeholder="Rechercher un livre avec un EAN/Titre/Auteur">
 		</div>
 		<div id="filter">
-			<select name="selectStatus" id="selectStatus">
+			<select name="selectProvider" id="selectProvider">
 				<option selected value="disabled"> -- Filtrer par fournisseur -- </option>
 				<option value="MLP">Maison de la presse</option>
 				<option value="LPH">Librairie place au herbes</option>
 			</select>
-			<select name="selectProdiver" id="selectProdiver">
+			<select name="selectStatus" id="selectStatus">
 				<option selected value="disabled"> -- Filtrer par statut -- </option>
 				<option value="acquired">Aquis</option>
 				<option value="nonAcquired">Non aquis</option>
@@ -34,82 +34,23 @@
 				<option value="equipment">Equipment</option>
 				<option value="notAvailable">Non disponible</option>
 			</select>
-			<select name="selectSection" id="selectSection">
-				<option selected value="disabled"> -- Filtrer par section -- </option>
-				<option value="disabled"> -- Acc -- </option>
-				<option value="A">A</option>
-				<option value="I">I</option>
-				<option value="C">C</option>
-				<option value="Picto">Picto</option>
-				<option value="disabled"> -- Roman Jeunesse -- </option>
-				<option value="JR">JR</option>
-				<option value="PR">PR</option>
-				<option value="JT">JT</option>
-				<option value="JP">JP</option>
-				<option value="disabled"> -- Roman Ado -- </option>
-				<option value="R ADO">R ADO</option>
-				<option value="T ADO">T ADO</option>
-				<option value="P ADO">P ADO</option>
-				<option value="disabled"> -- Doc Jeunesse -- </option>
-				<option value="Doc jeunesse">Doc jeunesse</option>
-				<option value="Petit doc">Petit doc</option>
-				<option value="disabled"> -- Manga -- </option>
-				<option value="MJ">MJ</option>
-				<option value="MADO">MADO</option>
-				<option value="MA">MA</option>
-				<option value="disabled"> -- Roman Adulte -- </option>
-				<option value="VO ANG">VO ANG</option>
-				<option value="SF">SF</option>				
-				<option value="RH">RH</option>
-				<option value="RP">RP</option>
-				<option value="GC">GC</option>
-				<option value="RL">RL</option>
-				<option value="R">R</option>
-				<option value="disabled"> -- Doc Adulte* -- </option>
-				<option value="Vie pratique et loisirs">Vie pratique et Loisirs</option>
-				<option value="Sciences, techniques et nature">Sciences Techniques et nature</option>
-				<option value="Local Regional">Local Regional</option>
-				<option value="Emploi Formation">Emploi Formation</option>
-				<option value="Arts et Culture">Arts et Culture</option>
-				<option value="Sciences humaines et sociales">Sciences humaines et sociales</option>
-				<option value="Biographie">Biographie</option>
-				<option value="disabled"> -- BD Adulte/Ado -- </option>
-				<option value="BDA">BDA</option>
-				<option value="BDADO">BDADO</option>
-			</select>
-
-			<select name="" id=""></select>
-			<select name="" id=""></select>
-			<select name="" id=""></select>
+			<% types.forEach(function(type) { 
+				if (type.sections != null && type.coteSections != null) {
+					if (type.sections.length != type.coteSections.length) console.error("Error, sections != coteSections for type = " + type.id); %>
+					<select name="selectSection" id="selectSection-<%= type.id %>" class="hidden">
+						<% type.sections.forEach(function(section, sectionId) { %>
+							<option value="<%= type.coteSections[sectionId] %>"><%= section %></option>
+						<% }); %>
+					</select>
+				<% } 
+			}); %>
 		</div>
 	</header>
 	<nav id="category-selector">
-		<input type="radio" name="category" id="acc" checked>
-		<label for="acc">Album Compte Comptine</label>
-
-		<input type="radio" name="category" id="romJunior">
-		<label for="romJunior">Roman Jeunesse</label>
-
-		<input type="radio" name="category" id="romYoung">
-		<label for="romYoung">Roman Ado</label>
-
-		<input type="radio" name="category" id="docJunior">
-		<label for="docJunior">Doc Jeunesse</label>
-
-		<input type="radio" name="category" id="manga">
-		<label for="manga">Manga</label>
-
-		<input type="radio" name="category" id="BDJunior">
-		<label for="BDJunior">BD Jeunesse</label>
-
-		<input type="radio" name="category" id="romAdult">
-		<label for="romAdult">Roman Adulte</label>
-
-		<input type="radio" name="category" id="docAdult">
-		<label for="docAdult">Doc Adulte</label>
-
-		<input type="radio" name="category" id="BDAdultYoung">
-		<label for="BDAdultYoung">BD Adulte/Ado</label>
+		<% types.forEach(function(type){ %>
+			<input type="radio" name="category" id="<%= type.id %>" <%= type.id == 'all' ? 'checked' : '' %>>
+			<label for="<%= type.id %>"><%= type.title %></label>
+		<% }); %>
 	</nav>
 	<section id="addAndMultiEdit">
 		<div id="MultiEdit">
@@ -137,6 +78,6 @@
 	<% types.forEach(function(type){ %>
 		<%- include('modal', {type}); %>
 	<% }); %>
-</body>
 
+</body>
 </html>
