@@ -32,7 +32,7 @@ header {
 }
 
 /* Barre de recherche (2/4) */
-#seatch_bar {
+#seatchBar {
     width: 50%;
     padding: 0 15px;
 }
@@ -249,7 +249,7 @@ option {
         gap: 15px;
     }
     
-    #name, #seatch_bar, #filter {
+    #name, #seatchBar, #filter {
         width: 100%;
     }
 }
