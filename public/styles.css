@@ -1,9 +1,18 @@
-/* Styles généraux */
+/**
+ * FICHIER: style.css
+ * DESCRIPTION: Styles pour une application de bibliothèque/librairie avec mode sombre
+ * AUTEUR: Basé sur le code fourni
+ * DATE: 14 avril 2025
+ */
+
+/* ========================================
+   1. RESET ET STYLES DE BASE
+   ======================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -12,7 +21,9 @@ body {
     min-height: 100vh;
 }
 
-/* En-tête */
+/* ========================================
+   2. HEADER ET NAVIGATION
+   ======================================== */
 header {
     display: flex;
     padding: 20px;
@@ -21,7 +32,7 @@ header {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Titre (1/4) */
+/* Logo/Titre (occupe 25% de la largeur) */
 #name {
     width: 25%;
     font-size: 22px;
@@ -31,12 +42,16 @@ header {
     text-align: center;
 }
 
-/* Barre de recherche (2/4) */
+/* ========================================
+   3. BARRE DE RECHERCHE
+   ======================================== */
+/* Conteneur de la barre de recherche (occupe 50% de la largeur) */
 #seatchBar {
     width: 50%;
     padding: 0 15px;
 }
 
+/* Champ de recherche */
 #search {
     width: 100%;
     padding: 12px 15px;
@@ -58,7 +73,10 @@ header {
     color: #a0a0a0;
 }
 
-/* Zone des filtres (1/4) */
+/* ========================================
+   4. FILTRES
+   ======================================== */
+/* Zone des filtres (occupe 25% de la largeur) */
 #filter {
     width: 25%;
     display: flex;
@@ -68,6 +86,7 @@ header {
     padding: 0 15px;
 }
 
+/* Styles communs pour les menus déroulants */
 select {
     width: 100%;
     padding: 10px;
@@ -90,26 +109,31 @@ option {
     color: #e0e0e0;
 }
 
+/* ========================================
+   5. SÉLECTEUR DE CATÉGORIES
+   ======================================== */
 #category-selector {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	padding: 20px;
-	background-color: #2d2d3f;
-	box-shadow:
-		0 -1px 4px rgba(0, 0, 0, 0.2),  /* ombre douce vers le haut */
-		0 2px 6px rgba(0, 0, 0, 0.15); /* ombre légère vers le bas */
-	justify-content: center;
-	position: relative;
-	z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+    background-color: #2d2d3f;
+    box-shadow:
+        0 -1px 4px rgba(0, 0, 0, 0.2),
+        /* Ombre douce vers le haut */
+        0 2px 6px rgba(0, 0, 0, 0.15);
+    /* Ombre légère vers le bas */
+    justify-content: center;
+    position: relative;
+    z-index: 1;
 }
 
-
-
+/* Masquer les boutons radio natifs */
 #category-selector input[type="radio"] {
     display: none;
 }
 
+/* Style des étiquettes pour les catégories */
 #category-selector label {
     background-color: #383850;
     color: #e0e0e0;
@@ -117,24 +141,166 @@ option {
     border-radius: 6px;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
     user-select: none;
 }
 
-/* Survol */
+/* État de survol */
 #category-selector label:hover {
     background-color: #434361;
 }
 
 /* État sélectionné (actif) */
-#category-selector input[type="radio"]:checked + label {
+#category-selector input[type="radio"]:checked+label {
     background-color: #4ade80;
     color: #1e1e2e;
     box-shadow: 0 0 0 2px #4ade80;
 }
 
-/* Responsive */
+/* ========================================
+   6. SECTION AJOUT ET MODIFICATIONS MULTIPLES
+   ======================================== */
+#addAndMultiEdit {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #2d2d3f;
+    border-top: none;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Conteneur pour les modifications multiples */
+#MultiEdit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex: 1;
+    width: 200px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#MultiEdit label {
+    color: #e0e0e0;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+#MultiEdit input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+#MultiEdit select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #383850;
+    color: #e0e0e0;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#MultiEdit select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #4ade80;
+}
+
+/* Boutons d'action */
+#MultiEdit button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #383850;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#MultiEdit button:hover {
+    background-color: #4ade80;
+    color: #1e1e2e;
+    box-shadow: 0 0 0 2px #4ade80;
+}
+
+/* Styles pour les boutons désactivés */
+button:disabled {
+    background-color: #2a2a3a !important;
+    color: #6d6d7d !important;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none !important;
+    border: 1px solid #3d3d50 !important;
+}
+
+button:disabled:hover {
+    background-color: #2a2a3a !important;
+    color: #6d6d7d !important;
+    transform: none !important;
+    box-shadow: none !important;
+
+/* Bouton d'ajout de livre */
+#addAndMultiEdit #addBook {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #383850;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#addAndMultiEdit #addBook:hover {
+    background-color: #4ade80;
+    color: #1e1e2e;
+    box-shadow: 0 0 0 2px #4ade80;
+}
+
+#addBookWrapper {
+    display: flex;
+    align-self: center;
+}
+
+/* Conteneur pour checkbox et bouton appliquer */
+.checkbox-and-apply {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Classe utilitaire pour masquer des éléments */
+.hidden {
+    display: none;
+}
+
+/* ========================================
+   7. MEDIA QUERIES - RESPONSIVE DESIGN
+   ======================================== */
+/* Tablettes et mobiles */
 @media (max-width: 768px) {
+
+    /* Responsive du header */
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #name,
+    #seatchBar,
+    #filter {
+        width: 100%;
+    }
+
+    /* Responsive du sélecteur de catégories */
     #category-selector {
         justify-content: flex-start;
     }
@@ -143,128 +309,23 @@ option {
         flex: 1 1 calc(50% - 10px);
         text-align: center;
     }
-}
 
-#addAndMultiEdit {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-	padding: 20px;
-	background-color: #2d2d3f;
-	border-top: none;
-	flex-wrap: wrap;
-	gap: 10px;
-}
-
-#MultiEdit {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	flex: 1;
-    width: 200px;
-	flex-direction: column;
-	align-items: flex-start;
-}
-
-#MultiEdit label {
-	color: #e0e0e0;
-	font-size: 14px;
-	margin-right: 10px;
-}
-
-#MultiEdit input[type="checkbox"] {
-	transform: scale(1.2);
-	cursor: pointer;
-}
-
-#MultiEdit select {
-	padding: 10px;
-	border: none;
-	border-radius: 5px;
-	background-color: #383850;
-	color: #e0e0e0;
-	font-size: 14px;
-	cursor: pointer;
-	transition: all 0.2s ease;
-}
-
-#MultiEdit select:focus {
-	outline: none;
-	box-shadow: 0 0 0 2px #4ade80;
-}
-
-#MultiEdit button {
-	padding: 10px 16px;
-	border: none;
-	border-radius: 6px;
-	background-color: #383850;
-	color: #e0e0e0;
-	cursor: pointer;
-	transition: background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-#MultiEdit button:hover {
-	background-color: #4ade80;
-	color: #1e1e2e;
-	box-shadow: 0 0 0 2px #4ade80;
-}
-
-#addAndMultiEdit #addBook {
-	padding: 10px 16px;
-	border: none;
-	border-radius: 6px;
-	background-color: #383850;
-	color: #e0e0e0;
-	cursor: pointer;
-	transition: background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-#addAndMultiEdit #addBook:hover {
-	background-color: #4ade80;
-	color: #1e1e2e;
-	box-shadow: 0 0 0 2px #4ade80;
-}
-
-#addBookWrapper {
-	display: flex;
-    align-self: center;
-}
-
-.checkbox-and-apply {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-}
-
-
-/* Responsive */
-@media (max-width: 768px) {
-    header {
+    /* Responsive de la section ajout et modifications */
+    #addAndMultiEdit {
         flex-direction: column;
-        gap: 15px;
+        align-items: stretch;
     }
-    
-    #name, #seatchBar, #filter {
+
+    #addAndMultiEdit>div {
         width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
     }
-}
 
-@media (max-width: 768px) {
-	#addAndMultiEdit {
-		flex-direction: column;
-		align-items: stretch;
-	}
-
-	#addAndMultiEdit > div {
-		width: 100%;
-		display: flex;
-		justify-content: space-between;
-		flex-wrap: wrap;
-		gap: 10px;
-	}
-
-	#MultiEdit {
-		flex-direction: column;
-		align-items: flex-start;
-	}
+    #MultiEdit {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
