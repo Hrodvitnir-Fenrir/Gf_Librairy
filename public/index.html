@@ -1,11 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
 	<title>Document</title>
 </head>
+
 <body>
-	<h1>Hello World</h1>
+	<header>
+		<div id="name">
+			Base de donnée des livres
+		</div>
+		<div id="seatch_bar">
+			<input type="text" id="search" placeholder="Rechercher un livre avec un EAN/Titre/Auteur">
+		</div>
+		<div id="filter">
+			<select name="selectStatus" id="selectStatus">
+				<option selected value="disabled"> -- Choississez un fournisseur -- </option>
+				<option value="MLP">Maison de la presse</option>
+				<option value="LPH">Librairie place au herbes</option>
+			</select>
+			<select name="selectProdiver" id="selectProdiver">
+				<option selected value="disabled"> -- Choisissez un statut -- </option>
+				<option value="acquired">Aquis</option>
+				<option value="nonAcquired">Non aquis</option>
+				<option value="onList">Sur liste d'acquisition</option>
+				<option value="onShiping">En cours de livraison</option>
+				<option value="equipment">Equipment</option>
+				<option value="notAvailable">Non disponible</option>
+			</select>
+		</div>
+	</header>
+	<nav id="category-selector">
+		<input type="radio" name="category" id="acc" checked>
+		<label for="acc">Album Compte Comptine</label>
+	
+		<input type="radio" name="category" id="romJunior">
+		<label for="romJunior">Roman Jeunesse</label>
+	
+		<input type="radio" name="category" id="romYoung">
+		<label for="romYoung">Roman Ado</label>
+	
+		<input type="radio" name="category" id="docJunior">
+		<label for="docJunior">Doc Jeunesse</label>
+	
+		<input type="radio" name="category" id="manga">
+		<label for="manga">Manga</label>
+	
+		<input type="radio" name="category" id="BDJunior">
+		<label for="BDJunior">BD Jeunesse</label>
+	
+		<input type="radio" name="category" id="romAdult">
+		<label for="romAdult">Roman Adulte</label>
+	
+		<input type="radio" name="category" id="docAdult">
+		<label for="docAdult">Doc Adulte</label>
+	
+		<input type="radio" name="category" id="BDAdultYoung">
+		<label for="BDAdultYoung">BD Adulte/Ado</label>
+	</nav>
+	
 </body>
+
 </html>
