@@ -1,0 +1,82 @@
+<div id="modal-<%= type.id %>" class="modal">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h2>Ajouter un livre (<%= type.title %>)</h2>
+			<span class="close">&times;</span>
+		</div>
+
+		<form id="accForm">
+			<div class="flex-row">
+				<input name="ean" placeholder="Code EAN" required class="flex-half">
+				<button type="button" class="flex-half fetch">Récupérer les infos en ligne</button>
+			</div>
+
+			<div class="section-title">INFORMATIONS PRINCIPALES</div>
+			<div class="flex-row">
+				<input name="image" placeholder="URL image" required class="flex-half">
+				<input name="title" placeholder="Titre" required class="flex-half">
+			</div>
+			<div class="flex-row">
+				<input name="tome" placeholder="Tome" class="flex-half">
+				<input name="date" placeholder="Date" required class="flex-half">
+			</div>
+			<input name="link" placeholder="Lien">
+			<input name="author" placeholder="Auteur" required>
+			<input name="editor" placeholder="Editeur" required>
+
+			<div class="section-title">CLASSIFICATION</div>
+			<div class="flex-row">
+				<input name="section" placeholder="Section" list="section-options" class="flex-half" required>
+				<datalist id="section-options">
+					<% type.sections.forEach(function(section){ %>
+						<option value="<%= section %>">
+					<% }); %>
+				</datalist>
+				<input name="genre" placeholder="Genre" list="genre-options" class="flex-half" required>
+				<datalist id="genre-options">
+					<option value="Tout public">
+					<option value="Tout petit">
+				</datalist>
+			</div>
+			<div class="flex-row">
+				<input name="format" placeholder="Format" list="format-options" class="flex-half" required>
+				<datalist id="format-options">
+					<option value="Poche">
+					<option value="Grand format">
+					<option value="Carré">
+					<option value="Italien">
+					<option value="Livre + CD">
+				</datalist>
+				<input name="age" placeholder="Age" type="number" class="flex-half">
+			</div>
+			<div class="flex-row">
+				<input name="coteSection" placeholder="Cote section" class="flex-half" required>
+				<input name="coteName" placeholder="Cote nom" class="flex-half" required>
+			</div>
+
+			<div class="section-title">ACQUISITION</div>
+			<div class="flex-row">
+				<input name="provider" placeholder="Fournisseur" list="provider-options" class="flex-half" required>
+				<datalist id="provider-options">
+					<option value="Maison de la presse">
+					<option value="Librairie place au herbes">
+				</datalist>
+				<select name="status" class="flex-half" required>
+					<option disabled selected value>-- Status --</option>
+					<option value="acquired">Acquis</option>
+					<option value="nonAcquired">Non acquis</option>
+					<option value="onList">Sur liste d'acquisition</option>
+					<option value="onShiping">En cours de livraison</option>
+					<option value="equipment">Equipement</option>
+					<option value="notAvailable">Non disponible</option>
+				</select>
+			</div>
+			<input name="price" placeholder="Prix (€)" type="number" step="0.01" required>
+
+			<div class="btn-group">
+				<button type="submit" class="flex-half validate">Valider</button>
+				<button type="button" class="flex-half cancel close">Annuler</button>
+			</div>
+		</form>
+	</div>
+</div>
