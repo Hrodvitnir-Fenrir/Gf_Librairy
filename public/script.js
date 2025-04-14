@@ -2,51 +2,82 @@
 
 const radios = document.getElementsByName("category");
 
-function sectionUpdated() {
+function updateSelectVisibility() {
 	for (const radio of radios) {
-		if (radio.checked) {
-			let section = document.getElementById("selectSection-" + radio.id);
+		const typeId = radio.id;
+		const isChecked = radio.checked;
 
-			if (section != null) {
-				section.style.display = "block";
+		// Liste des sélecteurs à gérer
+		const selectors = [
+			"selectSection-" + typeId,
+			"selectGenre-" + typeId,
+			"selectDeweyClass-" + typeId,
+			"selectThematic-" + typeId,
+		];
+
+		// Afficher ou cacher les sélecteurs selon l'état du radio
+		selectors.forEach((selectorId) => {
+			const selector = document.getElementById(selectorId);
+			if (selector) {
+				selector.style.display = isChecked ? "block" : "none";
 			}
+		});
 
-			if (radio.id == "all") {
+		// Gestion du bouton d'ajout
+		if (isChecked) {
+			if (typeId === "all") {
 				document.getElementById("addBook").setAttribute("disabled", "");
 			} else {
 				document.getElementById("addBook").removeAttribute("disabled");
 			}
-		} else {
-			let section = document.getElementById("selectSection-" + radio.id);
-
-			if (section != null) {
-				section.style.display = "none";
-			}
 		}
 	}
 }
 
-// init radio update
-sectionUpdated();
+// Initialisation
+updateSelectVisibility();
 
+// Ajout des écouteurs d'événements
 for (const radio of radios) {
-	radio.addEventListener("change", function () {
-		sectionUpdated();
-	});
+	radio.addEventListener("change", updateSelectVisibility);
 }
 
+// Fonctions utilitaires pour récupérer les valeurs sélectionnées
 function getCurrentType() {
-	let type = null;
-
 	for (const radio of radios) {
 		if (radio.checked) {
-			type = radio.id;
-			break;
+			return radio.id;
 		}
 	}
-
-	return type;
+	return null;
 }
+
+// function getSelectedValue(prefix) {
+// 	const type = getCurrentType();
+// 	if (type) {
+// 		const select = document.getElementById(prefix + "-" + type);
+// 		if (select && select.style.display !== "none") {
+// 			return select.value;
+// 		}
+// 	}
+// 	return null;
+// }
+
+// function getCurrentSection() {
+// 	return getSelectedValue("selectSection");
+// }
+
+// function getCurrentGenre() {
+// 	return getSelectedValue("selectGenre");
+// }
+
+// function getCurrentDeweyClass() {
+// 	return getSelectedValue("selectDeweyClass");
+// }
+
+// function getCurrentThematic() {
+// 	return getSelectedValue("selectThematic");
+// }
 
 function openModal() {
 	// todo get type selected
