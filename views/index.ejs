@@ -2,82 +2,121 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="modal.css">
-	<script src="script.js" defer></script>
-	<!-- <script src="./logic/addForm.js" defer></script> -->
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modal.css">
+    <script src="script.js" defer></script>
+    <title>Document</title>
 </head>
 
 <body>
-	<header>
-		<div id="name">
-			Base de donnée des livres
-		</div>
-		<div id="seatchBar">
-			<input type="text" id="search" placeholder="Rechercher un livre avec un EAN/Titre/Auteur">
-		</div>
-		<div id="filter">
-			<select name="selectProvider" id="selectProvider">
-				<option selected value="disabled"> -- Filtrer par fournisseur -- </option>
-				<option value="MLP">Maison de la presse</option>
-				<option value="LPH">Librairie place au herbes</option>
-			</select>
-			<select name="selectStatus" id="selectStatus">
-				<option selected value="disabled"> -- Filtrer par statut -- </option>
-				<option value="acquired">Aquis</option>
-				<option value="nonAcquired">Non aquis</option>
-				<option value="onList">Sur liste d'acquisition</option>
-				<option value="onShiping">En cours de livraison</option>
-				<option value="equipment">Equipment</option>
-				<option value="notAvailable">Non disponible</option>
-			</select>
-			<% types.forEach(function(type) { 
-				if (type.sections != null && type.coteSections != null) {
-					if (type.sections.length != type.coteSections.length) console.error("Error, sections != coteSections for type = " + type.id); %>
-					<select name="selectSection" id="selectSection-<%= type.id %>" class="hidden">
-						<% type.sections.forEach(function(section, sectionId) { %>
-							<option value="<%= type.coteSections[sectionId] %>"><%= section %></option>
-						<% }); %>
-					</select>
-				<% } 
-			}); %>
-		</div>
-	</header>
-	<nav id="category-selector">
-		<% types.forEach(function(type){ %>
-			<input type="radio" name="category" id="<%= type.id %>" <%= type.id == 'all' ? 'checked' : '' %>>
-			<label for="<%= type.id %>"><%= type.title %></label>
-		<% }); %>
-	</nav>
-	<section id="addAndMultiEdit">
-		<div id="MultiEdit">
-			<div class="checkbox-and-apply">
-				<input type="checkbox" name="SelectAll" id="selectAll">
-				<label for="selectAll">Selectionner tout les livres visibles</label>
-				<button id="applyNewStatus">Appliquer</button>
-			</div>
-			<div class="status-selector">
-				<select name="selectProdiver" id="selectProdiverEdit">
-					<option selected value="disabled" disabled> -- Choisissez un statut -- </option>
-					<option value="acquired">Aquis</option>
-					<option value="nonAcquired">Non aquis</option>
-					<option value="onList">Sur liste d'acquisition</option>
-					<option value="onShiping">En cours de livraison</option>
-					<option value="equipment">Equipment</option>
-					<option value="notAvailable">Non disponible</option>
-				</select>
-			</div>
-		</div>
-		<div id="addBookWrapper">
-			<button id="addBook" onclick="openModal()">Ajouter un livre</button>
-		</div>
-	</section>
-	<% types.forEach(function(type){ %>
-		<%- include('modal', {type}); %>
-	<% }); %>
+    <header>
+        <div id="name">
+            Base de donnée des livres
+        </div>
+        <div id="seatchBar">
+            <input type="text" id="search" placeholder="Rechercher un livre avec un EAN/Titre/Auteur">
+        </div>
+        <div id="filter">
+            <select name="selectProvider" id="selectProvider">
+                <option selected> -- Filtrer par fournisseur -- </option>
+                <option value="MLP">Maison de la presse</option>
+                <option value="LPH">Librairie place au herbes</option>
+            </select>
+            <select name="selectStatus" id="selectStatus">
+                <option selected> -- Filtrer par statut -- </option>
+                <option value="acquired">Aquis</option>
+                <option value="nonAcquired">Non aquis</option>
+                <option value="onList">Sur liste d'acquisition</option>
+                <option value="onShiping">En cours de livraison</option>
+                <option value="equipment">Equipment</option>
+                <option value="notAvailable">Non disponible</option>
+            </select>
+            <% types.forEach(function(type) { if (type.sections !=null && type.coteSections !=null) { if
+                (type.sections.length !=type.coteSections.length) { console.error("Error, sections !=coteSections for type=" + type.id);
+                    } 
+            %>
+                <select name=" selectSection" id="selectSection-<%= type.id %>" class="hidden">
+                <option selected> -- Filtrer par section -- </option>
+                <% type.sections.forEach(function(section, sectionId) { %>
+                    <option value="<%= type.coteSections[sectionId] %>">
+                        <%= section %>
+                    </option>
+                    <% }); %>
+                        </select>
+                        <% } }); %>
 
+                            <% types.forEach(function(type) { if (type.genres !=null) { %>
+                                <select name="selectGenre" id="selectGenre-<%= type.id %>" class="hidden">
+                                    <option selected> -- Filtrer par genre -- </option>
+                                    <% type.genres.forEach(function(genre) { %>
+                                        <option value="<%= genre %>">
+                                            <%= genre %>
+                                        </option>
+                                        <% }); %>
+                                </select>
+                                <% } }); %>
+
+                                    <% types.forEach(function(type) { if (type.deweyClass !=null) { %>
+                                        <select name="selectDeweyClass" id="selectDeweyClass-<%= type.id %>"
+                                            class="hidden">
+                                            <option selected> -- Filtrer par Dewey Class -- </option>
+                                            <% type.deweyClass.forEach(function(deweyClass) { %>
+                                                <option value="<%= deweyClass %>">
+                                                    <%= deweyClass %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                        <% } }); %>
+
+                                            <% types.forEach(function(type) { if (type.thematic !=null) { %>
+                                                <select name="selectThematic" id="selectThematic-<%= type.id %>"
+                                                    class="hidden">
+                                                    <option selected> -- Filtrer par thématique -- </option>
+                                                    <% type.thematic.forEach(function(thematic) { %>
+                                                        <option value="<%= thematic %>">
+                                                            <%= thematic %>
+                                                        </option>
+                                                        <% }); %>
+                                                </select>
+                                                <% } }); %>
+        </div>
+    </header>
+    <nav id="category-selector">
+        <% types.forEach(function(type) { %>
+            <input type="radio" name="category" id="<%= type.id %>" <%=type.id=='all' ? 'checked' : '' %>>
+            <label for="<%= type.id %>">
+                <%= type.title %>
+            </label>
+            <% }); %>
+    </nav>
+    <section id="addAndMultiEdit">
+        <div id="MultiEdit">
+            <div class="checkbox-and-apply">
+                <input type="checkbox" name="SelectAll" id="selectAll">
+                <label for="selectAll">Selectionner tout les livres visibles</label>
+                <button id="applyNewStatus">Appliquer</button>
+            </div>
+            <div class="status-selector">
+                <select name="selectProdiver" id="selectProdiverEdit">
+                    <option selected value="disabled" disabled> -- Choisissez un statut -- </option>
+                    <option value="acquired">Aquis</option>
+                    <option value="nonAcquired">Non aquis</option>
+                    <option value="onList">Sur liste d'acquisition</option>
+                    <option value="onShiping">En cours de livraison</option>
+                    <option value="equipment">Equipment</option>
+                    <option value="notAvailable">Non disponible</option>
+                </select>
+            </div>
+        </div>
+        <div id="addBookWrapper">
+            <button id="addBook" onclick="openModal()">Ajouter un livre</button>
+        </div>
+    </section>
+    <% types.forEach(function(type) { %>
+        <%- include('modal', {type}); %>
+            <% }); %>
 </body>
+
 </html>
