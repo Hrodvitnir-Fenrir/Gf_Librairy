@@ -79,11 +79,16 @@ header {
 /* Zone des filtres (occupe 25% de la largeur) */
 #filter {
     width: 25%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Deux colonnes de largeur égale */
     gap: 10px;
     padding: 0 15px;
+}
+
+@media (max-width: 1200px) {
+    #filter {
+        grid-template-columns: 1fr; /* Une seule colonne quand l'écran est étroit */
+    }
 }
 
 /* Styles communs pour les menus déroulants */
@@ -230,6 +235,7 @@ option {
     box-shadow: 0 0 0 2px #4ade80;
 }
 
+
 /* Styles pour les boutons désactivés */
 button:disabled {
     background-color: #2a2a3a !important;
@@ -245,6 +251,7 @@ button:disabled:hover {
     color: #6d6d7d !important;
     transform: none !important;
     box-shadow: none !important;
+}
 
 /* Bouton d'ajout de livre */
 #addAndMultiEdit #addBook {
