@@ -8,7 +8,7 @@
 /* ========================================
    1. RESET ET STYLES DE BASE
    ======================================== */
-* {
+   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -235,7 +235,6 @@ option {
     box-shadow: 0 0 0 2px #4ade80;
 }
 
-
 /* Styles pour les boutons désactivés */
 button:disabled {
     background-color: #2a2a3a !important;
@@ -277,11 +276,33 @@ button:disabled:hover {
     align-self: center;
 }
 
-/* Conteneur pour checkbox et bouton appliquer */
-.checkbox-and-apply {
+/* Conteneur pour checkbox et bouton exporter */
+.checkbox-and-export {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+/* Conteneur pour le sélecteur de statut et le bouton appliquer */
+.status-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-selector select {
+    flex-grow: 1;
+}
+
+/* Bouton exporter avec style spécifique */
+#exportBooks {
+    background-color: #3b82f6; /* Bleu pour différencier du bouton Appliquer */
+}
+
+#exportBooks:hover {
+    background-color: #60a5fa;
+    color: #1e1e2e;
+    box-shadow: 0 0 0 2px #60a5fa;
 }
 
 /* Classe utilitaire pour masquer des éléments */
@@ -294,7 +315,6 @@ button:disabled:hover {
    ======================================== */
 /* Tablettes et mobiles */
 @media (max-width: 768px) {
-
     /* Responsive du header */
     header {
         flex-direction: column;
@@ -334,5 +354,20 @@ button:disabled:hover {
     #MultiEdit {
         flex-direction: column;
         align-items: flex-start;
+    }
+    
+    /* Adapte les conteneurs en version mobile */
+    .checkbox-and-export,
+    .status-selector {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    .status-selector select {
+        width: calc(70% - 5px);
+    }
+    
+    .status-selector button {
+        width: calc(30% - 5px);
     }
 }
