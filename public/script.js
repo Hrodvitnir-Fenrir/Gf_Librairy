@@ -145,13 +145,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	}
 
-	// Fonction pour mettre à jour la visibilité des sélecteurs
+	// Affichage selcteur selon la catégorie choisie
 	function updateSelectVisibility() {
 		for (const radio of radios) {
 			const typeId = radio.id;
 			const isChecked = radio.checked;
 
-			// Liste des sélecteurs à gérer
 			const selectors = [
 				"selectSection-" + typeId,
 				"selectGenre-" + typeId,
@@ -159,7 +158,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				"selectThematic-" + typeId,
 			];
 
-			// Afficher ou cacher les sélecteurs selon l'état du radio
 			selectors.forEach((selectorId) => {
 				const selector = document.getElementById(selectorId);
 				if (selector) {
@@ -167,7 +165,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 			});
 
-			// Gestion du bouton d'ajout
 			if (isChecked) {
 				const addBookButton = document.getElementById("addBook");
 				if (typeId === "all") {
@@ -299,88 +296,18 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	// Fonction pour récupérer les informations d'un livre via l'EAN
-	function fetchBookInfo(ean, form) {
+	async function fetchBookInfo(ean, form) {
 		if (!ean) return;
 
-		// Ici, vous implémenteriez l'appel à une API pour récupérer les infos
-		// Par exemple avec fetch:
+		const response = await fetch(`/api/fetchInfo?ean=${ean}`);
+		const { data: book } = await response.json();
+		console.log(book.volumeInfo.title);
 
-		// Simuler un chargement
-		const fetchButton = form.querySelector("button.fetch");
-		if (fetchButton) {
-			fetchButton.textContent = "Chargement...";
-		}
-
-		// Exemple d'appel API (à adapter selon votre backend)
-		/*
-        fetch(`/api/books/ean/${ean}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Livre non trouvé');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Remplir le formulaire avec les données reçues
-                fillFormWithBookData(form, data);
-            })
-            .catch(error => {
-                alert("Erreur: " + error.message);
-            })
-            .finally(() => {
-                if (fetchButton) {
-                    fetchButton.textContent = "Récupérer les infos en ligne";
-                }
-            });
-        */
-
-		// Pour le moment, afficher un message pour indiquer où implémenter
-		alert(
-			"Fonction à implémenter: récupération des infos pour l'EAN " + ean,
-		);
-		if (fetchButton) {
-			fetchButton.textContent = "Récupérer les infos en ligne";
-		}
-	}
-
-	// Fonction pour remplir le formulaire avec les données d'un livre
-	function fillFormWithBookData(form, data) {
-		// Remplir chaque champ avec les données correspondantes
-		const fields = [
-			"title",
-			"author",
-			"editor",
-			"image",
-			"date",
-			"link",
-			"tome",
-			"section",
-			"genre",
-			"format",
-			"age",
-			"coteSection",
-			"coteName",
-			"provider",
-			"price",
-		];
-
-		fields.forEach((field) => {
-			const input = form.querySelector(`[name="${field}"]`);
-			if (input && data[field]) {
-				input.value = data[field];
-			}
-		});
-
-		// Traitement spécial pour le statut (select)
-		const statusSelect = form.querySelector('[name="status"]');
-		if (statusSelect && data.status) {
-			for (let i = 0; i < statusSelect.options.length; i++) {
-				if (statusSelect.options[i].value === data.status) {
-					statusSelect.selectedIndex = i;
-					break;
-				}
-			}
-		}
+		form.querySelector("input[name='title']").value = book.volumeInfo.title;
+		form.querySelector("input[name='date']").value =
+			book.volumeInfo.publishedDate.split("-")[0];
+		form.querySelector("input[name='author']").value =
+			book.volumeInfo.authors[0];
 	}
 
 	// Fonction pour soumettre le formulaire
