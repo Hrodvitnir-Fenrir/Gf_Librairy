@@ -1,15 +1,18 @@
 .modal {
 	position: fixed;
-	top: 0; left: 0;
-	width: 100vw; height: 100vh;
-	background: rgba(0,0,0,0.75);
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.75);
 	display: none;
 	align-items: center;
 	justify-content: center;
 	z-index: 9999;
 	backdrop-filter: blur(4px);
-  }
-  .modal-content {
+}
+
+.modal-content {
 	background: #2d2d3f;
 	padding: 20px;
 	border-radius: 12px;
@@ -17,50 +20,57 @@
 	max-height: 90vh;
 	overflow-y: auto;
 	color: #e0e0e0;
-	box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  }
-  .modal-header {
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 20px;
-	border-bottom: 1px solid rgba(255,255,255,0.1);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 	padding-bottom: 12px;
-  }
-  .modal-header h2 {
+}
+
+.modal-header h2 {
 	margin: 0;
 	font-size: 18px;
 	color: #4ade80;
 	font-weight: 500;
-  }
-  .modal-content input,
-  .modal-content select {
+}
+
+.modal-content input,
+.modal-content select {
 	width: 100%;
 	padding: 10px 12px;
 	border-radius: 6px;
-	border: 1px solid rgba(255,255,255,0.1);
+	border: 1px solid rgba(255, 255, 255, 0.1);
 	background: rgba(26, 26, 36, 0.6);
 	color: #e0e0e0;
 	font-size: 14px;
 	margin-bottom: 10px;
 	box-sizing: border-box;
-  }
-  .modal-content input:focus,
-  .modal-content select:focus {
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
 	outline: none;
 	border-color: #4ade80;
-  }
-  .modal-content input::placeholder {
-	color: rgba(224,224,224,0.4);
-  }
-  /* Style pour le champ avec datalist */
-  .modal-content input[list] {
+}
+
+.modal-content input::placeholder {
+	color: rgba(224, 224, 224, 0.4);
+}
+
+/* Style pour le champ avec datalist */
+.modal-content input[list] {
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23aaaaaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
 	background-repeat: no-repeat;
 	background-position: right 10px center;
 	padding-right: 30px;
-  }
-  .modal-content button {
+}
+
+.modal-content button {
 	padding: 12px;
 	border-radius: 6px;
 	border: none;
@@ -69,93 +79,82 @@
 	cursor: pointer;
 	transition: all 0.2s ease;
 	width: 100%;
-  }
-  .modal-content button.validate {
+}
+
+.modal-content button.validate {
 	background: #4ade80;
 	color: #1e1e2e;
-  }
-  .modal-content button.validate:hover {
+}
+
+.modal-content button.validate:hover {
 	background: #3fcf74;
-  }
-  .modal-content button.cancel {
+}
+
+.modal-content button.cancel {
 	background: #ff6b6b;
 	color: white;
-  }
-  .modal-content button.cancel:hover {
+}
+
+.modal-content button.cancel:hover {
 	background: #ff5252;
-  }
-  .modal-content button.fetch {
+}
+
+.modal-content button.fetch {
 	background: #4ade80;
 	color: #1e1e2e;
 	height: 41px;
-  }
-  .modal-content button.fetch:hover {
+}
+
+.modal-content button.fetch:hover {
 	background: #3fcf74;
-  }
-  .modal-content .close {
+}
+
+.modal-content .close {
 	cursor: pointer;
 	color: #aaa;
 	font-size: 18px;
 	transition: color 0.2s ease;
-  }
-  .modal-content .close:hover {
+}
+
+.modal-content .close:hover {
 	color: white;
-  }
-  .flex-row {
+}
+
+.flex-row {
 	display: flex;
 	gap: 10px;
-  }
-  .flex-half {
+}
+
+.flex-half {
 	flex: 1;
-  }
-  .section-title {
+}
+
+.section-title {
 	font-size: 12px;
 	text-transform: uppercase;
 	color: #4ade80;
 	margin: 20px 0 10px 0;
 	letter-spacing: 0.5px;
-  }
-  .btn-group {
+}
+
+.btn-group {
 	display: flex;
 	gap: 10px;
 	margin-top: 20px;
-  }
-  .spinner-button {
-	position: relative;
-  }
-  .spinner-button:after {
-	content: "";
-	position: absolute;
-	right: 10px;
-	top: 50%;
-	transform: translateY(-50%);
-	width: 14px;
-	height: 14px;
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23222' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83'/%3E%3C/svg%3E");
-	background-repeat: no-repeat;
-	background-position: center;
-	opacity: 0;
-	transition: opacity 0.2s;
-  }
-  .spinner-button:focus:after {
-	opacity: 1;
-	animation: spin 1s linear infinite;
-  }
-  @keyframes spin {
-	0% { transform: translateY(-50%) rotate(0deg); }
-	100% { transform: translateY(-50%) rotate(360deg); }
-  }
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-	  -webkit-appearance: none;
-	  margin: 0;
-	}
-	input[type=number] {
-		  -moz-appearance: textfield;
-	}
-	.modal-content button.fetch:disabled {
-background: #2f2f3f;
-color: #888;
-cursor: not-allowed;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+.modal-content button.fetch:disabled {
+	background: #2f2f3f;
+	color: #888;
+	cursor: not-allowed;
+}
