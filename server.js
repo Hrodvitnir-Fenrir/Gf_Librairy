@@ -62,7 +62,7 @@ const types = [
 		id: "docJunior",
 		title: "Doc Jeunesse",
 		sections: ["Doc Jeunesse", "Petit doc"],
-		coteSections: null,
+		coteSections: [],
 		genres: null,
 		format: ["Poche", "Grand format", "Carré", "Italien", "Livre + CD"],
 		deweyClass: [
@@ -103,7 +103,7 @@ const types = [
 		id: "bdJunior",
 		title: "BD Jeunesse",
 		sections: null,
-		coteSections: "BDJ",
+		coteSections: ["BDJ"],
 		genres: [
 			"Action Aventure",
 			"SF Fantaisie",
@@ -139,7 +139,7 @@ const types = [
 		id: "docAdult",
 		title: "Doc Adulte",
 		sections: null,
-		coteSections: null,
+		coteSections: [],
 		genres: null,
 		format: ["Poche", "Grand format", "Carré", "Italien", "Livre + CD"],
 		deweyClass: [
