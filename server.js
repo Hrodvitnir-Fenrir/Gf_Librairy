@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const { db, initDatabase } = require("./lib/db.js");
 const apiRoutes = require("./routes/api");
-const { title } = require("process");
 
 const types = [
 	{
