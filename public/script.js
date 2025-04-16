@@ -52,6 +52,61 @@ function getCurrentType() {
 	return null;
 }
 
+function openModal() {
+	let type = getCurrentType();
+
+	const modal = document.getElementById("modal-" + type);
+	modal.style.display = "flex";
+
+	modal.querySelectorAll(".close").forEach((el) => {
+		el.addEventListener("click", () => (modal.style.display = "none"));
+	});
+}
+
+// Fonction pour initialiser les boutons "fetch" dans tous les modaux
+function initializeFetchButtons() {
+	// Sélectionner tous les formulaires dans les modaux
+	const forms = document.querySelectorAll(".modal form");
+
+	forms.forEach((form) => {
+		// Récupérer le champ EAN et le bouton fetch dans chaque formulaire
+		const eanInput = form.querySelector('input[name="ean"]');
+		const fetchButton = form.querySelector("button.fetch");
+
+		// Désactiver le bouton fetch par défaut
+		if (fetchButton) {
+			fetchButton.setAttribute("disabled", "");
+
+			// Ajouter un écouteur d'événement pour le champ EAN
+			if (eanInput) {
+				eanInput.addEventListener("input", function () {
+					// Activer le bouton si le champ EAN contient du texte
+					if (this.value.trim() !== "") {
+						fetchButton.removeAttribute("disabled");
+					} else {
+						fetchButton.setAttribute("disabled", "");
+					}
+				});
+			}
+		}
+	});
+}
+
+// Appeler cette fonction après que le DOM soit chargé
+document.addEventListener("DOMContentLoaded", function () {
+	// Initialiser la visibilité des sélecteurs
+	updateSelectVisibility();
+
+	// Ajouter les écouteurs d'événements pour les radios
+	for (const radio of radios) {
+		radio.addEventListener("change", updateSelectVisibility);
+	}
+
+	// Initialiser les boutons fetch
+	initializeFetchButtons();
+});
+
+/*
 // function getSelectedValue(prefix) {
 // 	const type = getCurrentType();
 // 	if (type) {
@@ -79,17 +134,8 @@ function getCurrentType() {
 // 	return getSelectedValue("selectThematic");
 // }
 
-function openModal() {
-	// todo get type selected
-	let type = getCurrentType();
 
-	const modal = document.getElementById("modal-" + type);
-	modal.style.display = "flex";
 
-	modal.querySelectorAll(".close").forEach((el) => {
-		el.addEventListener("click", () => (modal.style.display = "none"));
-	});
-}
 
 function filter() {
 	// get search
@@ -109,3 +155,4 @@ function filter() {
 
 	// repalce a ==> lien avec filter
 }
+*/
