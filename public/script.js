@@ -1,7 +1,9 @@
 /* eslint-env browser */
 
 document.addEventListener("DOMContentLoaded", function () {
-	// Variables globales
+	/*
+	Sélectionnes les bouttons
+	*/
 	const radios = document.getElementsByName("category");
 
 	// Initialisation
@@ -31,6 +33,27 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 		}
 
+		// Écouteur pour le nouveau bouton "Exporter"
+		const exportButton = document.getElementById("exportBooks");
+		if (exportButton) {
+			exportButton.addEventListener("click", function () {
+				// Logique pour exporter les livres sélectionnés
+				console.log("Exporter les livres sélectionnés");
+
+				// // Vérifier si des livres sont sélectionnés
+				// const allChecked = document.getElementById("selectAll").checked;
+				// if (allChecked) {
+				// 	// Simuler une exportation de tous les livres
+				// 	alert(
+				// 		"Fonctionnalité d'exportation en cours de développement",
+				// 	);
+				// 	// Ici vous pourriez déclencher un téléchargement CSV ou autre format
+				// } else {
+				// 	alert("Veuillez sélectionner des livres à exporter");
+				// }
+			});
+		}
+
 		// Écouteur pour le bouton "Appliquer"
 		const applyButton = document.getElementById("applyNewStatus");
 		if (applyButton) {
@@ -40,34 +63,13 @@ document.addEventListener("DOMContentLoaded", function () {
 					document.getElementById("selectProdiverEdit");
 				const selectedStatus = statusSelect.value;
 
-				if (selectedStatus === "disabled") {
-					alert("Veuillez choisir un statut à appliquer");
-					return;
-				}
+				// if (selectedStatus === "disabled") {
+				// 	alert("Veuillez choisir un statut à appliquer");
+				// 	return;
+				// }
 
 				console.log("Appliquer le statut: " + selectedStatus);
 				// Implémentation à venir: appliquer le statut aux livres sélectionnés
-			});
-		}
-
-		// Écouteur pour le nouveau bouton "Exporter"
-		const exportButton = document.getElementById("exportBooks");
-		if (exportButton) {
-			exportButton.addEventListener("click", function () {
-				// Logique pour exporter les livres sélectionnés
-				console.log("Exporter les livres sélectionnés");
-
-				// Vérifier si des livres sont sélectionnés
-				const allChecked = document.getElementById("selectAll").checked;
-				if (allChecked) {
-					// Simuler une exportation de tous les livres
-					alert(
-						"Fonctionnalité d'exportation en cours de développement",
-					);
-					// Ici vous pourriez déclencher un téléchargement CSV ou autre format
-				} else {
-					alert("Veuillez sélectionner des livres à exporter");
-				}
 			});
 		}
 
@@ -233,9 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	// Fonction pour filtrer les résultats
 	function filter() {
 		// Récupérer les valeurs de filtrage
-		const searchTerm = document
-			.getElementById("search")
-			.value.toLowerCase();
+		const searchTerm = document.getElementById("search"); // .value.toLowerCase(); ???
 		const providerFilter = document.getElementById("selectProvider").value;
 		const statusFilter = document.getElementById("selectStatus").value;
 
