@@ -301,13 +301,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		const response = await fetch(`/api/fetchInfo?ean=${ean}`);
 		const { data: book } = await response.json();
-		console.log(book.volumeInfo.title);
+		console.log(book);
 
-		form.querySelector("input[name='title']").value = book.volumeInfo.title;
-		form.querySelector("input[name='date']").value =
-			book.volumeInfo.publishedDate.split("-")[0];
-		form.querySelector("input[name='author']").value =
-			book.volumeInfo.authors[0];
+		form.querySelector("input[name='title']").value = book.title;
+		if (book.coverUrl != null) {
+			form.querySelector("input[name='image']").value = book.coverUrl;
+		}
+		form.querySelector("input[name='date']").value = book.publicationYear;
+		form.querySelector("input[name='author']").value = book.author;
+		form.querySelector("input[name='editor']").value = book.editor;
+		form.querySelector("input[name='link']").value = book.bnfLink;
+		form.querySelector("input[name='price']").value = book.price;
+
+		// form.querySelector("input[name='title']").value = book.volumeInfo.title;
+		// form.querySelector("input[name='date']").value =
+		// 	book.volumeInfo.publishedDate.split("-")[0];
+		// form.querySelector("input[name='author']").value =
+		// 	book.volumeInfo.authors[0];
 	}
 
 	// Fonction pour soumettre le formulaire
