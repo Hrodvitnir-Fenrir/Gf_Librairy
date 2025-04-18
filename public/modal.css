@@ -158,3 +158,35 @@ input[type="number"] {
 	color: #888;
 	cursor: not-allowed;
 }
+/* Styles pour les groupes d'input avec label */
+.input-group {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-label {
+    font-size: 11px;
+    color: rgba(224, 224, 224, 0.7);
+    margin-bottom: 3px;
+    font-weight: 400;
+}
+
+/* Assurer que les inputs dans input-group remplissent l'espace */
+.input-group input,
+.input-group select {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+/* Ajuster l'espacement entre les groupes */
+.input-group {
+    margin-bottom: 10px;
+}
+
+/* Correction pour le bouton fetch qui doit s'aligner avec l'input */
+.flex-row button.fetch {
+    margin-top: 18px; /* Ajuster cette valeur si nécessaire pour aligner correctement */
+    height: 41px;
+}
