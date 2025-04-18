@@ -312,12 +312,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		form.querySelector("input[name='editor']").value = book.editor;
 		form.querySelector("input[name='link']").value = book.bnfLink;
 		form.querySelector("input[name='price']").value = book.price;
-
-		// form.querySelector("input[name='title']").value = book.volumeInfo.title;
-		// form.querySelector("input[name='date']").value =
-		// 	book.volumeInfo.publishedDate.split("-")[0];
-		// form.querySelector("input[name='author']").value =
-		// 	book.volumeInfo.authors[0];
 	}
 
 	// Fonction pour soumettre le formulaire
