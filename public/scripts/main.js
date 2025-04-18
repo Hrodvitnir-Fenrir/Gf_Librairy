@@ -1,4 +1,15 @@
 /* eslint-env browser */
+import {
+	initializeFetchButtons,
+	setupModalListeners,
+	fetchBookInfo,
+} from "./modal.js";
+import {
+	getCurrentSection,
+	getCurrentGenre,
+	getCurrentDeweyClass,
+	getCurrentThematic,
+} from "./fetchStatus.js";
 
 document.addEventListener("DOMContentLoaded", function () {
 	/*
@@ -14,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		updateSelectVisibility();
 		setupEventListeners();
 		initializeFetchButtons();
-		setupModalListeners();
+		setupModalListeners(radios);
 	}
 
 	// Configuration des écouteurs d'événements
@@ -88,63 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	}
 
-	// Initialisation des boutons "fetch" dans les modaux
-	function initializeFetchButtons() {
-		// Sélectionner tous les formulaires dans les modaux
-		const forms = document.querySelectorAll(".modal form");
-
-		forms.forEach((form) => {
-			// Récupérer le champ EAN et le bouton fetch dans chaque formulaire
-			const eanInput = form.querySelector('input[name="ean"]');
-			const fetchButton = form.querySelector("button.fetch");
-
-			// Désactiver le bouton fetch par défaut
-			if (fetchButton && eanInput) {
-				fetchButton.setAttribute("disabled", "");
-
-				// Ajouter un écouteur d'événement pour le champ EAN
-				eanInput.addEventListener("input", function () {
-					// Activer le bouton si le champ EAN contient du texte
-					if (this.value.trim() !== "") {
-						fetchButton.removeAttribute("disabled");
-					} else {
-						fetchButton.setAttribute("disabled", "");
-					}
-				});
-
-				// Ajouter l'écouteur d'événement pour le bouton fetch
-				fetchButton.addEventListener("click", function () {
-					fetchBookInfo(eanInput.value.trim(), form);
-				});
-			}
-		});
-	}
-
-	// Configuration des écouteurs pour les modaux
-	function setupModalListeners() {
-		// Ajouter les écouteurs une seule fois pour tous les modaux
-		const modals = document.querySelectorAll(".modal");
-
-		modals.forEach((modal) => {
-			// Fermer le modal quand on clique sur le X ou Annuler
-			const closeButtons = modal.querySelectorAll(".close");
-			closeButtons.forEach((button) => {
-				button.addEventListener("click", function () {
-					modal.style.display = "none";
-				});
-			});
-
-			// Gestion du formulaire
-			const form = modal.querySelector("form");
-			if (form) {
-				form.addEventListener("submit", function (e) {
-					e.preventDefault();
-					submitForm(form);
-				});
-			}
-		});
-	}
-
 	// Affichage selcteur selon la catégorie choisie
 	function updateSelectVisibility() {
 		for (const radio of radios) {
@@ -176,73 +130,17 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	}
 
-	// Fonction pour récupérer le type actuellement sélectionné
-	function getCurrentType() {
-		for (const radio of radios) {
-			if (radio.checked) {
-				return radio.id;
-			}
-		}
-		return null;
-	}
-
-	// Fonction pour ouvrir le modal correspondant au type sélectionné
-	function openModal() {
-		let type = getCurrentType();
-		if (!type) return;
-
-		const modal = document.getElementById("modal-" + type);
-		if (modal) {
-			modal.style.display = "flex";
-			// Réinitialiser le formulaire
-			const form = modal.querySelector("form");
-			if (form) form.reset();
-		}
-	}
-
-	// Fonction pour récupérer une valeur sélectionnée
-	function getSelectedValue(prefix) {
-		const type = getCurrentType();
-		if (type) {
-			const select = document.getElementById(prefix + "-" + type);
-			if (select && select.style.display !== "none") {
-				return select.value;
-			}
-		}
-		return null;
-	}
-
-	// Fonctions pour récupérer les valeurs de filtrage
-	function getCurrentSection() {
-		return getSelectedValue("selectSection");
-	}
-
-	function getCurrentGenre() {
-		return getSelectedValue("selectGenre");
-	}
-
-	function getCurrentDeweyClass() {
-		return getSelectedValue("selectDeweyClass");
-	}
-
-	function getCurrentThematic() {
-		return getSelectedValue("selectThematic");
-	}
-
 	// Fonction pour filtrer les résultats
 	function filter() {
-		// Récupérer les valeurs de filtrage
-		const searchTerm = document.getElementById("search"); // .value.toLowerCase(); ???
+		const searchTerm = document.getElementById("search");
 		const providerFilter = document.getElementById("selectProvider").value;
 		const statusFilter = document.getElementById("selectStatus").value;
 
-		// Récupérer les filtres spécifiques au type
-		const section = getCurrentSection();
-		const genre = getCurrentGenre();
-		const deweyClass = getCurrentDeweyClass();
-		const thematic = getCurrentThematic();
+		const section = getCurrentSection(radios);
+		const genre = getCurrentGenre(radios);
+		const deweyClass = getCurrentDeweyClass(radios);
+		const thematic = getCurrentThematic(radios);
 
-		// À implémenter: logique de filtrage avec ces valeurs
 		console.log("Filtrage avec:", {
 			searchTerm,
 			providerFilter,
@@ -253,7 +151,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			thematic,
 		});
 
-		// Appliquer les filtres aux livres (à implémenter)
 		filterBooks(
 			searchTerm,
 			providerFilter,
@@ -295,68 +192,11 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	}
 
-	// Fonction pour récupérer les informations d'un livre via l'EAN
-	async function fetchBookInfo(ean, form) {
-		if (!ean) return;
-
-		const response = await fetch(`/api/fetchInfo?ean=${ean}`);
-		const { data: book } = await response.json();
-		console.log(book);
-
-		form.querySelector("input[name='title']").value = book.title;
-		if (book.coverUrl != null) {
-			form.querySelector("input[name='image']").value = book.coverUrl;
-		}
-		form.querySelector("input[name='date']").value = book.publicationYear;
-		form.querySelector("input[name='author']").value = book.author;
-		form.querySelector("input[name='editor']").value = book.editor;
-		form.querySelector("input[name='link']").value = book.bnfLink;
-		form.querySelector("input[name='price']").value = book.price;
-	}
-
-	// Fonction pour soumettre le formulaire
-	function submitForm(form) {
-		// Récupérer toutes les données du formulaire
-		const formData = new FormData(form);
-		const bookData = {};
-
-		for (const [key, value] of formData.entries()) {
-			bookData[key] = value;
-		}
-
-		// Ajouter le type du livre
-		bookData.type = getCurrentType();
-
-		// Exemple: envoyer les données au serveur
-		console.log("Données du livre à envoyer:", bookData);
-
-		// Ici, vous implémenteriez l'envoi des données au serveur
-		/*
-        fetch('/api/books', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(bookData),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Fermer le modal et afficher un message de succès
-            const modal = form.closest('.modal');
-            if (modal) modal.style.display = 'none';
-            alert("Livre ajouté avec succès!");
-        })
-        .catch(error => {
-            alert("Erreur lors de l'ajout du livre: " + error.message);
-        });
-        */
-
-		// Pour le moment, simuler un succès
-		alert("Fonction à implémenter: ajout du livre " + bookData.title);
-		const modal = form.closest(".modal");
-		if (modal) modal.style.display = "none";
-	}
-
 	// Exposer les fonctions nécessaires globalement
-	window.openModal = openModal;
+	// Expose au HTML via le window
+	window.openModal = () =>
+		import("./modal.js").then((mod) => mod.openModal(radios));
+	window.submitForm = (form) =>
+		import("./modal.js").then((mod) => mod.submitForm(form, radios));
+	window.fetchBookInfo = (ean, form) => fetchBookInfo(ean, form);
 });
