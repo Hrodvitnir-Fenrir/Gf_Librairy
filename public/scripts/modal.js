@@ -169,7 +169,7 @@ function setupAutoFill(form) {
 //////////////////////
 
 // Fonction pour soumettre le formulaire
-export function submitForm(form, radios) {
+export async function submitForm(form, radios) {
 	// Récupérer toutes les données du formulaire
 	const formData = new FormData(form);
 	const bookData = {};
@@ -183,6 +183,16 @@ export function submitForm(form, radios) {
 
 	// Exemple: envoyer les données au serveur
 	console.log("Données du livre à envoyer:", bookData);
+
+	const response = await fetch("/api/newBook", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(bookData),
+	});
+
+	console.log(response);
 
 	// Ici, vous implémenteriez l'envoi des données au serveur
 	/*
@@ -207,6 +217,6 @@ export function submitForm(form, radios) {
 
 	// Pour le moment, simuler un succès
 	alert("Fonction à implémenter: ajout du livre " + bookData.title);
-	const modal = form.closest(".modal");
-	if (modal) modal.style.display = "none";
+	// const modal = form.closest(".modal");
+	// if (modal) modal.style.display = "none";
 }
