@@ -1,14 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const { insertAcc } = require("../lib/dbTweeker.js");
+const { insertBook, getBookByEan } = require("../lib/dbTweeker.js");
 const { fetchBookInfo } = require("../lib/fetchBook.js");
 
-router.post("/acc", (req, res) => {
+router.post("/newBook", (req, res) => {
 	try {
-		insertAcc(req.body);
+		insertBook(req.body);
 		res.status(200).json({ success: true });
 	} catch (err) {
 		console.error("Erreur insertAcc :", err);
+		res.status(500).json({ success: false, message: "Erreur serveur" });
+	}
+});
+
+router.get("/getBookByEan/:ean", (req, res) => {
+	try {
+		const book = getBookByEan(req.params.ean);
+		res.status(200).json({ success: true, data: book });
+	} catch (err) {
+		console.error("Erreur getBookByEan :", err);
 		res.status(500).json({ success: false, message: "Erreur serveur" });
 	}
 });
