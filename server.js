@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const { db, initDatabase } = require("./lib/db.js");
+const { db, initDatabase } = require("./lib/dbTweeker.js");
 const apiRoutes = require("./routes/api");
 
 const types = [
