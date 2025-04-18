@@ -7,111 +7,170 @@
 
 		<form id="accForm-<%= type.id %>">
 			<div class="flex-row">
-				<input name="ean" placeholder="Code EAN" required class="flex-half">
+				<div class="input-group flex-half">
+					<label class="input-label">Code EAN</label>
+					<input name="ean" placeholder="Code EAN" required>
+				</div>
 				<button type="button" class="flex-half fetch" disabled>Récupérer les infos en ligne</button>
 			</div>
 
 			<div class="section-title">INFORMATIONS PRINCIPALES</div>
 			<div class="flex-row">
-				<input name="title" placeholder="Titre" required class="flex-half">
-				<input name="image" placeholder="URL image" required class="flex-half">
+				<div class="input-group flex-half">
+					<label class="input-label">Titre</label>
+					<input name="title" placeholder="Titre" required>
+				</div>
+				<div class="input-group flex-half">
+					<label class="input-label">URL image</label>
+					<input name="image" placeholder="URL image" required>
+				</div>
 			</div>
 			<div class="flex-row">
-				<input name="tome" type="number" placeholder="Tome" class="flex-half">
-				<input name="date" placeholder="Date" required class="flex-half">
-				<input name="age" placeholder="Age" type="number" class="flex-half">
-
+				<div class="input-group flex-half">
+					<label class="input-label">Tome</label>
+					<input name="tome" type="number" placeholder="Tome">
+				</div>
+				<div class="input-group flex-half">
+					<label class="input-label">Date</label>
+					<input name="date" placeholder="Date" required>
+				</div>
+				<div class="input-group flex-half">
+					<label class="input-label">Age</label>
+					<input name="age" placeholder="Age" type="number">
+				</div>
 			</div>
 			<div class="flex-row">
-				<input name="author" placeholder="Auteur" required>
-				<input name="editor" placeholder="Editeur" required>
+				<div class="input-group">
+					<label class="input-label">Auteur</label>
+					<input name="author" placeholder="Auteur" required>
+				</div>
+				<div class="input-group">
+					<label class="input-label">Editeur</label>
+					<input name="editor" placeholder="Editeur" required>
+				</div>
 			</div>
-			<input name="link" placeholder="URL livre">
+			<div class="input-group">
+				<label class="input-label">URL livre</label>
+				<input name="link" placeholder="URL livre">
+			</div>
 
 			<div class="section-title">CLASSIFICATION</div>
 			<div class="flex-row">
 				<% if (type.sections !=null) { %>
-				<input name="section" placeholder="Section" list="section-options-<%= type.id %>" class="flex-half" required>
-				<datalist id="section-options-<%= type.id %>">
-					<% type.sections.forEach(function(section){ %>
-					<option value="<%= section %>">
-						<% }); %>
-				</datalist>
+				<div class="input-group flex-half">
+					<label class="input-label">Section</label>
+					<input name="section" placeholder="Section" list="section-options-<%= type.id %>" required>
+					<datalist id="section-options-<%= type.id %>">
+						<% type.sections.forEach(function(section){ %>
+						<option value="<%= section %>">
+							<% }); %>
+					</datalist>
+				</div>
 				<% } %>
 
 				<% if (type.genres !=null) { %>
-				<input name="genre" placeholder="Genre" list="genre-options-<%= type.id %>" class="flex-half" required>
-				<datalist id="genre-options-<%= type.id %>">
-					<% type.genres.forEach(function(genre){ %>
-					<option value="<%= genre %>">
-						<% }); %>
-				</datalist>
+				<div class="input-group flex-half">
+					<label class="input-label">Genre</label>
+					<input name="genre" placeholder="Genre" list="genre-options-<%= type.id %>" required>
+					<datalist id="genre-options-<%= type.id %>">
+						<% type.genres.forEach(function(genre){ %>
+						<option value="<%= genre %>">
+							<% }); %>
+					</datalist>
+				</div>
 				<% } %>
 			</div>
 			<div class="flex-row">
 				<% if (type.deweyClass !=null) { %>
-				<input name="deweyClass" placeholder="Classe Dewey" list="dewey-class-options-<%= type.id %>" class="flex-half" required>
-				<datalist id="dewey-class-options-<%= type.id %>">
-					<% type.deweyClass.forEach(function(deweyClass){ %>
-					<option value="<%= deweyClass %>">
-						<% }); %>
-				</datalist>
+				<div class="input-group flex-half">
+					<label class="input-label">Classe Dewey</label>
+					<input name="deweyClass" placeholder="Classe Dewey" list="dewey-class-options-<%= type.id %>" required>
+					<datalist id="dewey-class-options-<%= type.id %>">
+						<% type.deweyClass.forEach(function(deweyClass){ %>
+						<option value="<%= deweyClass %>">
+							<% }); %>
+					</datalist>
+				</div>
 				<% } %>
 
 				<% if (type.deweyClass !=null) { %>
-				<input name="coteDewey" placeholder="Cote Dewey" class="flex-half" required>
+				<div class="input-group flex-half">
+					<label class="input-label">Cote Dewey</label>
+					<input name="coteDewey" placeholder="Cote Dewey" required>
+				</div>
 				<% } %>
 			</div>
 
 			<% if (type.tthematic !=null) { %>
-			<input name="tthematic" placeholder="Tématique" list="tthematic-options-<%= type.id %>" class="flex-full" required>
-			<datalist id="tthematic-options-<%= type.id %>">
-				<% type.thematic.forEach(function(thematic){ %>
-				<option value="<%= thematic %>">
-					<% }); %>
-			</datalist>
+			<div class="input-group">
+				<label class="input-label">Tématique</label>
+				<input name="tthematic" placeholder="Tématique" list="tthematic-options-<%= type.id %>" class="flex-full" required>
+				<datalist id="tthematic-options-<%= type.id %>">
+					<% type.thematic.forEach(function(thematic){ %>
+					<option value="<%= thematic %>">
+						<% }); %>
+				</datalist>
+			</div>
 			<% } %>
 
 			<div class="flex-row">
 				<% if (type.coteSections !=null) { %>
-				<input name="coteSection" placeholder="Cote section" list="cote-section-options-<%= type.id %>" class="flex-half" required>
-				<datalist id="cote-section-options-<%= type.id %>">
-					<% type.coteSections.forEach(function(coteSection){ %>
-					<option value="<%= coteSection %>">
-						<% }); %>
-				</datalist>
+				<div class="input-group flex-half">
+					<label class="input-label">Cote section</label>
+					<input name="coteSection" placeholder="Cote section" list="cote-section-options-<%= type.id %>" required>
+					<datalist id="cote-section-options-<%= type.id %>">
+						<% type.coteSections.forEach(function(coteSection){ %>
+						<option value="<%= coteSection %>">
+							<% }); %>
+					</datalist>
+				</div>
 				<% } %>
 
-				<input name="coteName" placeholder="Cote Nom" list="cote-name-options-<%= type.id %>" class="flex-half" required>
+				<div class="input-group flex-half">
+					<label class="input-label">Cote Nom</label>
+					<input name="coteName" placeholder="Cote Nom" list="cote-name-options-<%= type.id %>" required>
+				</div>
 			</div>
 
 			<div class="section-title">ACQUISITION</div>
 			<div class="flex-row">
-				<input name="provider" placeholder="Fournisseur" list="provider-options-<%= type.id %>" class="flex-half" required>
-				<datalist id="provider-options-<%= type.id %>">
-					<option value="Maison de la presse">
-					<option value="Librairie place au herbes">
-				</datalist>
-				<select name="status" class="flex-half" required>
-					<option disabled selected value>-- Status --</option>
-					<option value="acquired">Acquis</option>
-					<option value="nonAcquired">Non acquis</option>
-					<option value="onList">Sur liste d'acquisition</option>
-					<option value="onShiping">En cours de livraison</option>
-					<option value="equipment">Equipement</option>
-					<option value="notAvailable">Non disponible</option>
-				</select>
+				<div class="input-group flex-half">
+					<label class="input-label">Fournisseur</label>
+					<input name="provider" placeholder="Fournisseur" list="provider-options-<%= type.id %>" required>
+					<datalist id="provider-options-<%= type.id %>">
+						<option value="Maison de la presse">
+						<option value="Librairie place au herbes">
+					</datalist>
+				</div>
+				<div class="input-group flex-half">
+					<label class="input-label">Status</label>
+					<select name="status" required>
+						<option disabled selected value>-- Status --</option>
+						<option value="acquired">Acquis</option>
+						<option value="nonAcquired">Non acquis</option>
+						<option value="onList">Sur liste d'acquisition</option>
+						<option value="onShiping">En cours de livraison</option>
+						<option value="equipment">Equipement</option>
+						<option value="notAvailable">Non disponible</option>
+					</select>
+				</div>
 			</div>
 			<div class="flex-row">
-				<input name="price" placeholder="Prix (€)" type="number" class="flex-half" required>
+				<div class="input-group flex-half">
+					<label class="input-label">Prix (€)</label>
+					<input name="price" placeholder="Prix (€)" type="number" required>
+				</div>
 
 				<% if (type.format !=null) { %>
-				<input name="format" placeholder="Format" list="format-options-<%= type.id %>" class="flex-half" required>
-				<datalist id="format-options-<%= type.id %>">
-					<% type.format.forEach(function(format){ %>
-					<option value="<%= format %>">
-						<% }); %>
-				</datalist>
+				<div class="input-group flex-half">
+					<label class="input-label">Format</label>
+					<input name="format" placeholder="Format" list="format-options-<%= type.id %>" required>
+					<datalist id="format-options-<%= type.id %>">
+						<% type.format.forEach(function(format){ %>
+						<option value="<%= format %>">
+							<% }); %>
+					</datalist>
+				</div>
 				<% } %>
 			</div>
 
