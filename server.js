@@ -17,7 +17,7 @@ const types = [
 	{
 		id: "acc",
 		title: "Album Compte Comptine",
-		sections: ["Albums", "Imagier", "Conte", "Comptine"],
+		sections: ["Album", "Imagier", "Conte", "Comptine"],
 		coteSections: ["A", "I", "C", "Picto"],
 		genres: ["Tout petit", "Tout public"],
 		format: ["Poche", "Grand format", "Carré", "Italien", "Livre + CD"],
