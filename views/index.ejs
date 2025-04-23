@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./styles/styles.css">
 	<link rel="stylesheet" href="./styles/modal.css">
+	<link rel="stylesheet" href="./styles/table.css">
 	<script  type="module" src="./scripts/main.js" defer></script>
 	<link rel="icon" href="./icon.png">
 	<title>Base de données des livres</title>
@@ -119,6 +120,9 @@
 			<button id="addBook" onclick="openModal()">Ajouter un livre</button>
 		</div>
 	</section>
+	<% types.forEach(function(type) { %>
+		<%- include('table', {type: type}) %>
+	<% }); %>
 
 	<% types.forEach(function(type) { 
         if (type.id !== 'all') { // Ne pas inclure de modal pour le type "all"
