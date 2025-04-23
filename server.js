@@ -202,5 +202,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-	console.log(`Serveur démarré sur http://localhost:${PORT}`);
+	console.log(`Serveur démarré sur http://192.168.1.1:${PORT}`);
 });
