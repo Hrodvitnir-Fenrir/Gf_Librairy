@@ -8,6 +8,9 @@
 		<form id="accForm-<%= type.id %>">
 			<div class="flex-row">
 				<div class="input-group flex-half">
+					<div class="tooltip duplicate-tooltip" style="display: none;">
+						Ce livre existe déjà dans la base de données !
+					</div>
 					<label class="input-label">Code EAN</label>
 					<input name="ean" placeholder="Code a 13 chiffres" required>
 				</div>
