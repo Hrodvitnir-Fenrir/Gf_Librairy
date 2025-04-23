@@ -1,0 +1,81 @@
+<div class="table-container">
+	<table id="book-table-<%= type.id %>" class="book-table hidden">
+		<thead>
+			<tr>
+				<th>EAN</th>
+				<th>Image</th>
+				<th>Titre / Tome</th>
+				<th>Date</th>
+				<th>Auteur / Editeur</th>
+				<th>Format</th>
+				<th>Age</th>
+				<% if (type.sections != null || type.id == "all") { %>
+				<th class="classification">Section</th>
+				<% } %>
+				<% if (type.genres != null || type.id == "all") { %>
+				<th class="classification">Genre</th>
+				<% } %>
+				<% if (type.thematic != null || type.id == "all") { %>
+				<th class="classification">Tématique</th>
+				<% } %>
+				<% if (type.deweyClass != null || type.id == "all") { %>
+				<th class="classification">Classe Dewey</th>
+				<% } %>
+				<% if (type.deweyCote != null || type.id == "all") { %>
+				<th class="classification">Cote Dewey</th>
+				<% } %>
+				<% if (type.coteSections != null || type.id == "all") { %>
+				<th class="classification">Cote section</th>
+				<% } %>
+				<th class="classification">Cote nom</th>
+				<th>Fournisseur</th>
+				<th>Status</th>
+				<th>Prix</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>valeur 1</td>
+				<td>valeur 1 bis</td>
+				<td>valeur 1 ter</td>
+				<td>valeur 1 quat</td>
+				<td>valeur 1 cinqu</td>
+				<td>valeur 1 six</td>
+				<td>valeur 1 sept</td>
+			</tr>
+			<tr>
+				<td>valeur 2</td>
+				<td>valeur 2 bis</td>
+				<td>valeur 2 ter</td>
+				<td>valeur 2 quat</td>
+			</tr>
+			<tr>
+				<td>valeur 3</td>
+				<td>valeur 3 bis</td>
+			</tr>
+			<tr>
+				<td>valeur 4</td>
+			</tr>
+			<tr>
+				<td>valeur 5</td>
+				<td>valeur 5 bis</td>
+				<td>valeur 5 ter</td>
+				<td>valeur 5 quat</td>
+				<td>valeur 5 cinqu</td>
+				<td>valeur 5 six</td>
+				<td>valeur 5 sept</td>
+				<td>valeur 5 huit</td>
+			</tr>
+			<tr>
+				<td>valeur 6</td>
+				<td>valeur 6 bis</td>
+				<td>valeur 6 ter</td>
+				<td>valeur 6 quat</td>
+				<td>valeur 6 cinqu</td>
+				<td>valeur 6 six</td>
+				<td>valeur 6 sept</td>
+				<td>valeur 6 huit</td>
+				<td>valeur 6 neuf</td>
+			</tr>
+		</tbody>
+	</table>
