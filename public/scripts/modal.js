@@ -61,6 +61,8 @@ export function initializeFetchButtons() {
 				} else {
 					fetchButton.setAttribute("disabled", "");
 				}
+				// recherche si le livre est déjà dans la base de donnée
+				checkDuplicate(this.value.trim());
 			});
 
 			// Ajouter l'écouteur d'événement pour le bouton fetch
@@ -94,6 +96,23 @@ export function setupModalListeners(radios) {
 			});
 		}
 	});
+}
+
+async function checkDuplicate(ean) {
+	const res = await fetch("/api/getBookByEan", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ ean }),
+	});
+	const response = await res.json();
+
+	if (response.data != undefined) {
+		document.querySelector(".duplicate-tooltip").style.display = "block";
+	} else {
+		document.querySelector(".duplicate-tooltip").style.display = "none";
+	}
 }
 
 function setupAutoFill(form) {
@@ -164,59 +183,56 @@ function setupAutoFill(form) {
 	}
 }
 
-//////////////////////
-// WORK IN PROGRESS //
-//////////////////////
-
 // Fonction pour soumettre le formulaire
 export async function submitForm(form, radios) {
 	// Récupérer toutes les données du formulaire
 	const formData = new FormData(form);
-	const bookData = {};
 
+	const bookData = {
+		type: "",
+		ean: "",
+		title: "",
+		image: "",
+		tome: "",
+		date: "",
+		age: "",
+		author: "",
+		editor: "",
+		link: "",
+		section: "",
+		genre: "",
+		thematic: "",
+		deweyClass: "",
+		deweyCote: "",
+		coteSection: "",
+		coteName: "",
+		provider: "",
+		status: "",
+		price: "",
+		format: "",
+	};
+
+	// Parcours des entrées du formulaire
 	for (const [key, value] of formData.entries()) {
-		bookData[key] = value;
+		// On vérifie si la clé existe dans bookData (pour éviter d’ajouter des clés non prévues)
+		if (key in bookData) {
+			bookData[key] = value === "" ? null : value;
+		}
 	}
 
-	// Ajouter le type du livre
+	// Ajout du type personnalisé (hors FormData)
 	bookData.type = getCurrentType(radios);
 
-	// Exemple: envoyer les données au serveur
-	console.log("Données du livre à envoyer:", bookData);
-
-	const response = await fetch("/api/newBook", {
+	await fetch("/api/newBook", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(bookData),
-	});
-
-	console.log(response);
-
-	// Ici, vous implémenteriez l'envoi des données au serveur
-	/*
-	fetch('/api/books', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(bookData),
-	})
-	.then(response => response.json())
-	.then(data => {
+	}).then(() => {
 		// Fermer le modal et afficher un message de succès
-		const modal = form.closest('.modal');
-		if (modal) modal.style.display = 'none';
 		alert("Livre ajouté avec succès!");
-	})
-	.catch(error => {
-		alert("Erreur lors de l'ajout du livre: " + error.message);
+		const modal = form.closest(".modal");
+		if (modal) modal.style.display = "none";
 	});
-	*/
-
-	// Pour le moment, simuler un succès
-	alert("Fonction à implémenter: ajout du livre " + bookData.title);
-	// const modal = form.closest(".modal");
-	// if (modal) modal.style.display = "none";
 }
