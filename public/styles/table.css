@@ -1,0 +1,225 @@
+/**
+ * FICHIER: table.css
+ * DESCRIPTION: Styles pour les tableaux de livres avec espace entre les groupes de colonnes
+ * DATE: 23 avril 2025
+ */
+
+/* Conteneur pour la table avec défilement horizontal si nécessaire */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 0;
+    margin: 0;
+}
+
+/* Styles de base de la table */
+.book-table {
+    width: 100%;
+    border-collapse: separate;
+    /* border-spacing: $0; */
+    font-size: 14px;
+    color: #e0e0e0;
+    background-color: transparent;
+}
+
+/* En-tête de table */
+.book-table thead tr {
+    height: 48px;
+    background-color: #2d2d3f;
+}
+
+.book-table th {
+    padding: 8px 16px;
+    text-align: left;
+    font-weight: 500;
+    color: #4ade80;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    white-space: nowrap;
+}
+
+/* Corps de table */
+.book-table tbody tr {
+    height: 52px;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.book-table tbody tr:nth-child(odd) {
+    background-color: rgba(45, 45, 63, 0.6);
+}
+
+.book-table tbody tr:nth-child(even) {
+    background-color: rgba(56, 56, 80, 0.6);
+}
+
+.book-table tbody tr:hover {
+    background-color: rgba(74, 222, 128, 0.1);
+}
+
+.book-table td {
+    padding: 8px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Groupes de colonnes - espacement */
+
+/* Groupe 1: Informations de base */
+.book-table th:nth-child(1), /* EAN */
+.book-table th:nth-child(2), /* Image */
+.book-table th:nth-child(3), /* Titre / Tome */
+.book-table th:nth-child(4), /* Date */
+.book-table th:nth-child(5), /* Auteur / Editeur */
+.book-table th:nth-child(6), /* Format */
+.book-table th:nth-child(7), /* Age */
+.book-table td:nth-child(1),
+.book-table td:nth-child(2),
+.book-table td:nth-child(3),
+.book-table td:nth-child(4),
+.book-table td:nth-child(5),
+.book-table td:nth-child(6),
+.book-table td:nth-child(7) {
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Espacement après le groupe 1 */
+.book-table th:nth-child(7),
+.book-table td:nth-child(7) {
+    border-right: 2px solid rgba(74, 222, 128, 0.2);
+    padding-right: 20px;
+}
+
+/* Groupe 2: Classification */
+/* Ajoutez des classes spécifiques à vos colonnes de classification */
+.book-table th.classification,
+.book-table td.classification {
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Dernière colonne du groupe 2 */
+.book-table th.classification:last-of-type,
+.book-table td.classification:last-of-type {
+    border-right: 2px solid rgba(74, 222, 128, 0.2);
+    padding-right: 20px;
+}
+
+/* Espacement avant le groupe 2 */
+.book-table th.classification:first-of-type,
+.book-table td.classification:first-of-type {
+    padding-left: 20px;
+}
+
+/* Groupe 3: Fournisseur, Status, Prix */
+.book-table th:nth-last-child(3),
+.book-table th:nth-last-child(2),
+.book-table td:nth-last-child(3),
+.book-table td:nth-last-child(2) {
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Espacement avant le groupe 3 */
+.book-table th:nth-last-child(3),
+.book-table td:nth-last-child(3) {
+    padding-left: 20px;
+}
+
+/* Style pour les cellules contenant des images */
+.book-table td img {
+    max-height: 40px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: block;
+}
+
+/* Cellules avec numéros EAN */
+.book-table td:first-child {
+    font-family: monospace;
+    color: #a0a0a0;
+}
+
+/* Style pour les statuts */
+.status-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-badge.acquired {
+    background-color: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+}
+
+.status-badge.nonAcquired {
+    background-color: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+}
+
+.status-badge.onList {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+}
+
+.status-badge.onShiping {
+    background-color: rgba(250, 204, 21, 0.2);
+    color: #facc15;
+}
+
+.status-badge.equipment {
+    background-color: rgba(168, 85, 247, 0.2);
+    color: #a855f7;
+}
+
+.status-badge.notAvailable {
+    background-color: rgba(100, 116, 139, 0.2);
+    color: #94a3b8;
+}
+
+/* Style pour les cases à cocher */
+.book-table td .checkbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-table td input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #4ade80;
+}
+
+/* Style pour les lignes sélectionnées */
+.book-table tr.selected {
+    background-color: rgba(74, 222, 128, 0.15) !important;
+}
+
+.book-table tr.selected:hover {
+    background-color: rgba(74, 222, 128, 0.25) !important;
+}
+
+/* Responsivité */
+@media (max-width: 1200px) {
+    .book-table {
+        min-width: 1200px; /* Force un minimum de largeur pour éviter la compression */
+    }
+}
+
+/* Classes utilitaires */
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.price {
+    font-weight: 500;
+    text-align: right;
+}
+
+.hidden {
+    display: none;
+}
