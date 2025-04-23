@@ -13,9 +13,10 @@ router.post("/newBook", (req, res) => {
 	}
 });
 
-router.get("/getBookByEan/:ean", (req, res) => {
+router.post("/getBookByEan", async (req, res) => {
+	const { ean } = req.body;
 	try {
-		const book = getBookByEan(req.params.ean);
+		const book = await getBookByEan(ean);
 		res.status(200).json({ success: true, data: book });
 	} catch (err) {
 		console.error("Erreur getBookByEan :", err);
