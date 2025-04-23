@@ -10,6 +10,7 @@ import {
 	getCurrentDeweyClass,
 	getCurrentThematic,
 } from "./fetchStatus.js";
+import { setupTableFilter } from "./filter.js";
 
 document.addEventListener("DOMContentLoaded", function () {
 	/*
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		setupEventListeners();
 		initializeFetchButtons();
 		setupModalListeners(radios);
+		setupTableFilter(radios);
 	}
 
 	// Configuration des écouteurs d'événements
@@ -50,18 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			exportButton.addEventListener("click", function () {
 				// Logique pour exporter les livres sélectionnés
 				console.log("Exporter les livres sélectionnés");
-
-				// // Vérifier si des livres sont sélectionnés
-				// const allChecked = document.getElementById("selectAll").checked;
-				// if (allChecked) {
-				// 	// Simuler une exportation de tous les livres
-				// 	alert(
-				// 		"Fonctionnalité d'exportation en cours de développement",
-				// 	);
-				// 	// Ici vous pourriez déclencher un téléchargement CSV ou autre format
-				// } else {
-				// 	alert("Veuillez sélectionner des livres à exporter");
-				// }
 			});
 		}
 
